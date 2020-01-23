@@ -17,7 +17,8 @@ public class Contato {
     @JoinColumn(name="telefone_id")
     private Telefone telefone;
     @NotNull(message = "O contato precisa de um setor")
-    @OneToMany(mappedBy = "contato")
+    @ManyToOne
+    @JoinColumn(name="setor_id")
     private Setor setor;
 
     public Contato() {

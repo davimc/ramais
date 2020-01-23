@@ -17,8 +17,7 @@ public class Setor {
     @OneToOne
     @JoinColumn(name= "telefone_id")
     private Telefone telefone;
-    @ManyToOne
-    @JoinColumn(name="contato_id")
+    @OneToMany(mappedBy = "setor")
     private List<Contato> contatos;
 
     public Setor(String nome, Telefone telefone) {

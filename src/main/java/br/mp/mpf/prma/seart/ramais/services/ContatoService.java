@@ -19,7 +19,8 @@ public class ContatoService {
             throw new ContatoException(e);
         }
     }
-    public void removerPorId(Contato contato){
+    public void remover(Contato contato){
         contatoRepository.delete(contato);
     }
+
 }

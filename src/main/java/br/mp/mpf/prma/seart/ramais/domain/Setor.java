@@ -1,5 +1,7 @@
 package br.mp.mpf.prma.seart.ramais.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.List;
@@ -15,9 +17,9 @@ public class Setor {
     private String nome;
 
     @OneToOne
-    @JoinColumn(name= "telefone_id")
     private Telefone telefone;
     @OneToMany(mappedBy = "setor")
+    @JsonBackReference
     private List<Contato> contatos;
 
     public Setor(String nome, Telefone telefone) {

@@ -19,6 +19,9 @@ public class ContatoService {
             throw new ContatoException(e);
         }
     }
+    public void buscarNome(String nome){
+
+    }
     public void remover(Contato contato){
         contatoRepository.delete(contato);
     }

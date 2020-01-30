@@ -6,11 +6,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface ContatoRepository extends JpaRepository <Contato, Long> {
     @Query("SELECT * FROM contato c WHERE nome = %?1%")
-    public Optional<Contato> retornaContatosPorNome(String nome);
-
+    public List<Contato> findByNome(String nome);
+    @Query("SELECT c FROM contato c WHERE telefone_id = ?")
+    public Contato findByTelefone(long telefoneId);
 }

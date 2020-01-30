@@ -1,5 +1,8 @@
 package br.mp.mpf.prma.seart.ramais.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -13,12 +16,11 @@ public class Contato {
     @NotEmpty(message = "O contato precisa de um nome")
     private String nome;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="telefone_id")
+    @OneToOne
     private Telefone telefone;
-    @NotNull(message = "O contato precisa de um setor")
     @ManyToOne
     @JoinColumn(name="setor_id")
+    @JsonManagedReference
     private Setor setor;
 
     public Contato() {

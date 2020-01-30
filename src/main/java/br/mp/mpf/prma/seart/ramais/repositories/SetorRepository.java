@@ -9,7 +9,8 @@ import java.util.List;
 
 @Repository
 public interface SetorRepository extends JpaRepository<Setor, Long> {
-    @Query("SELECT * FROM setor s WHERE nome = %?1%")
-    public List<Setor> findByNome(String nome);
+
+   /* @Query("SELECT * FROM setor s WHERE nome = %?1%")
+    public List<Setor> findByNome(String nome);*/
     
 }

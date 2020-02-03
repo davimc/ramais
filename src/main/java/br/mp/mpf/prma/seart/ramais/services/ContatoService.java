@@ -5,13 +5,16 @@ import br.mp.mpf.prma.seart.ramais.repositories.ContatoRepository;
 import br.mp.mpf.prma.seart.ramais.services.exceptions.ContatoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.ConstraintViolationException;
+import java.util.List;
 
 @Service
 public class ContatoService {
     @Autowired
     ContatoRepository contatoRepository;
+
     public void inserir(Contato contato) throws ContatoException {
         try{
             contatoRepository.save(contato);
@@ -19,11 +22,16 @@ public class ContatoService {
             throw new ContatoException(e);
         }
     }
+
     public void buscarNome(String nome){
 
     }
+
     public void remover(Contato contato){
         contatoRepository.delete(contato);
     }
 
+    public List<Contato> listaTodosContatos(){
+        return contatoRepository.findAll();
+    }
 }

@@ -17,10 +17,14 @@ public class Setor {
     private String nome;
 
     @OneToOne
+    @JoinColumn(name= "id_telefone")
     private Telefone telefone;
     @OneToMany(mappedBy = "setor")
     @JsonBackReference
     private List<Contato> contatos;
+
+    public Setor() {
+    }
 
     public Setor(String nome, Telefone telefone) {
         this.nome = nome;

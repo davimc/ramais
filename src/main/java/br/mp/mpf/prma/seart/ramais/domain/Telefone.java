@@ -5,24 +5,33 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Telefone {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id;
-    @NotEmpty(message = "O telefone não pode ser salvo sem número")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @NotNull(message = "O telefone nao pode ser salvo sem numero")
     private String numero;
-    @NotEmpty(message="O telefone não pode ser salvo sem um ramal")
-    private String ramal;
+    private String ramal = "4444";
 
-
-    public Telefone(String numero) {
-        this.numero = numero;
-        this.ramal = geraRamal();
+    public Telefone() {
     }
 
-    public long getId() {
+
+
+    public Telefone( String numero) {
+
+        this.numero = numero;
+        if(!numero.isEmpty())
+            this.ramal = geraRamal();
+        else
+            ramal = "4444";
+
+    }
+
+    public Long getId() {
         return id;
     }
 
@@ -42,7 +51,9 @@ public class Telefone {
         this.ramal = ramal;
     }
 
+
     private String geraRamal(){
+
         return numero.substring(numero.length()-4);
     }
 }

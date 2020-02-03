@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+
 
 @Entity
 public class Contato {
@@ -16,22 +16,23 @@ public class Contato {
     @NotEmpty(message = "O contato precisa de um nome")
     private String nome;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name= "id_telefone")
     private Telefone telefone;
     @ManyToOne
-    @JoinColumn(name="setor_id")
+    @JoinColumn(name="id_setor")
     @JsonManagedReference
     private Setor setor;
 
     public Contato() {
     }
 
-    public Contato(@NotEmpty(message = "O contato precisa de um nome") String nome, @NotNull(message = "O contato precisa de um setor") Setor setor) {
+    public Contato(@NotEmpty(message = "O contato precisa de um nome") String nome,  Setor setor) {
         this.nome = nome;
         this.setor = setor;
     }
 
-    public Contato(@NotEmpty(message = "O contato precisa de um nome") String nome, Telefone telefone, @NotNull(message = "O contato precisa de um setor") Setor setor) {
+    public Contato(@NotEmpty(message = "O contato precisa de um nome") String nome, Telefone telefone,  Setor setor) {
         this.nome = nome;
         this.telefone = telefone;
         this.setor = setor;

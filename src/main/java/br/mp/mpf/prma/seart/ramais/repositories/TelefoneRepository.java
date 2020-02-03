@@ -12,7 +12,6 @@ import java.util.Optional;
 
 @Repository
 public interface TelefoneRepository extends JpaRepository<Telefone, Long> {
-    @Query("SELECT c FROM contato c WHERE telefone_id = ?")
-    public Optional<Contato> retornaContatosPorTelefone(long telefoneId);
+
     
 }

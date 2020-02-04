@@ -20,25 +20,36 @@ public class TelefoneService {
     public void inserir(Telefone telefone) throws TelefoneException {
         if(!telefoneRepository.findByNumero(telefone.getNumero()).isPresent())
             try{
-
                 telefoneRepository.save(telefone);
             }catch (ConstraintViolationException e){
-                e.getMessage();
+                throw new TelefoneException(e);
             }
         else
             throw new TelefoneException(new Exception("Telefone já está cadastrado no sistema"));
-
+    }
+    /*atenção ao atualizar!!
+    TENHA CERTEZA QUE ESTE CONTATO JÁ EXISTE NO BD OU ENTÃO HAVERÁ DUPLICIDADE
+    */
+    public void atualizar(Telefone telefone) throws TelefoneException {
+        try{
+            telefoneRepository.save(telefone);
+        }catch (ConstraintViolationException e){
+            throw new TelefoneException(e);
+        }
     }
     @Transactional
     public void remover(Telefone telefone){
         telefoneRepository.delete(telefone);
     }
     @Transactional
-    public Optional<Telefone> encontraPorId(long id){
+    public Optional<Telefone> encontrarPorId(long id){
         return telefoneRepository.findById(id);
     }
 
-    public Optional<Telefone> encontraPorNumero(String numero){
+    public Optional<Telefone> encontrarPorNumero(String numero){
         return telefoneRepository.findByNumero(numero);
+    }
+    public Optional<Telefone> encontrarPorRamal(String ramal){
+        return telefoneRepository.findByRamal(ramal);
     }
 }

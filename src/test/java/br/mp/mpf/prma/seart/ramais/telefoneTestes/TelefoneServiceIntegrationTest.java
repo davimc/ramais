@@ -57,7 +57,21 @@ public class TelefoneServiceIntegrationTest {
         }
         System.out.println(telefone.getRamal());
 
-        Assert.assertEquals(telefoneService.encontraPorId(5).get().getId(), telefone.getId());
+        Assert.assertEquals(telefoneService.encontrarPorRamal(telefone.getRamal()).get().getId(), telefone.getId());
+    }
+    @Test
+    public void testaSalvarTelefoneComNumeroJaCadastrado(){
+        Telefone telefoneDuplicado = new Telefone(telefone.getNumero());
+        expectedException.expect(TelefoneException.class);
+        expectedException.expectMessage("Telefone já está cadastrado no sistema");
+        try{
+            telefoneService.inserir(telefone);
+            telefoneService.inserir(telefoneDuplicado);
+        }catch(TelefoneException e){
+            e.getMessage();
+        }
+        System.out.println(telefone.getRamal());
+
     }
     @Test
     public void testaSalvarUmNumeroJaCadastradoDeveRetornarExcecao(){

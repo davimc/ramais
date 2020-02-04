@@ -50,7 +50,7 @@ public class ContatoForm {
     }
     
     public Contato converter(){
-        Telefone numeroContato = telefoneService.encontraPorNumero(this.numeroTelefone).get();
+        Telefone numeroContato = telefoneService.encontrarPorNumero(this.numeroTelefone).get();
         Setor setorContato = setorService.encontraPorNome(this.nomeSetor).get();
         return numeroContato!=null? new Contato(nomeContato, numeroContato, setorContato):new Contato(nomeContato,setorContato);
     }

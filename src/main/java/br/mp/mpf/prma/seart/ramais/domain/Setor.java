@@ -61,6 +61,10 @@ public class Setor {
         this.contatos = contatos;
     }
 
+    public void adicionaNovoContato(Contato contato) {
+        this.contatos.add(contato);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

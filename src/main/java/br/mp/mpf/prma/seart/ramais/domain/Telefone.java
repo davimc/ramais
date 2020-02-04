@@ -22,11 +22,9 @@ public class Telefone {
 
 
     public Telefone( String numero) {
-
         this.numero = numero;
         this.ramal = geraRamal();
         isDisponivel = true;
-
     }
 
     public Long getId() {
@@ -39,14 +37,11 @@ public class Telefone {
 
     public void setNumero(String numero) {
         this.numero = numero;
+        this.ramal = geraRamal();
     }
 
     public String getRamal() {
         return ramal;
-    }
-
-    public void setRamal(String ramal) {
-        this.ramal = ramal;
     }
 
     public boolean isDisponivel() {

@@ -26,10 +26,21 @@ public class SetorService {
         else
             throw new SetorException(new Exception("Setor já está cadastrado no sistema"));
     }
+    /*atenção ao atualizar!!
+    TENHA CERTEZA QUE ESTE CONTATO JÁ EXISTE NO BD OU ENTÃO HAVERÁ DUPLICIDADE
+    */
+    public void atualizar(Setor setor) throws SetorException {
+        try {
+            setorRepository.save(setor);
+        } catch (ConstraintViolationException e) {
+            throw new SetorException(e);
+        }
+    }
     @Transactional
     public void remover(Setor setor){
         setorRepository.delete(setor);
     }
+
     public Optional<Setor> encontraPorNome(String nomeSetor){
         return setorRepository.findByNome(nomeSetor);
     }

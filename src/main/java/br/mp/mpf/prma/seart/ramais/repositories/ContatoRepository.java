@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,5 +14,6 @@ import java.util.Optional;
 public interface ContatoRepository extends JpaRepository <Contato, Long> {
     @Query("SELECT c FROM Contato c WHERE c.nome LIKE %:nome%")
     public Optional<Contato> findByNome(@Param("nome") String nome);
+    public Optional<Contato> findByTelefoneRamal(String ramal);
 
 }

@@ -15,4 +15,5 @@ import java.util.Optional;
 public interface TelefoneRepository extends JpaRepository<Telefone, Long> {
 
     public Optional<Telefone> findByNumero(String numero);
+    public Optional<Telefone> findByRamal(String ramal);
 }

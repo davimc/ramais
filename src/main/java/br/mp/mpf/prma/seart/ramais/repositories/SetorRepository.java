@@ -6,11 +6,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface SetorRepository extends JpaRepository<Setor, Long> {
 
    /* @Query("SELECT * FROM setor s WHERE nome = %?1%")
     public List<Setor> findByNome(String nome);*/
-    
+    public Optional<Setor> findByNome(String nome);
 }

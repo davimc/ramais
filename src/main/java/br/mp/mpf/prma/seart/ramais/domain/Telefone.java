@@ -1,9 +1,6 @@
 package br.mp.mpf.prma.seart.ramais.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -12,9 +9,12 @@ public class Telefone {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @NotNull(message = "O telefone nao pode ser salvo sem numero")
     private String numero;
-    private String ramal = "4444";
+    private String ramal;
+    @Column(name="disponivel")
+    private boolean isDisponivel;
 
     public Telefone() {
     }
@@ -24,10 +24,8 @@ public class Telefone {
     public Telefone( String numero) {
 
         this.numero = numero;
-        if(!numero.isEmpty())
-            this.ramal = geraRamal();
-        else
-            ramal = "4444";
+        this.ramal = geraRamal();
+        isDisponivel = true;
 
     }
 
@@ -51,9 +49,15 @@ public class Telefone {
         this.ramal = ramal;
     }
 
+    public boolean isDisponivel() {
+        return isDisponivel;
+    }
+
+    public void setDisponivel(boolean disponivel) {
+        isDisponivel = disponivel;
+    }
 
     private String geraRamal(){
-
         return numero.substring(numero.length()-4);
     }
 }

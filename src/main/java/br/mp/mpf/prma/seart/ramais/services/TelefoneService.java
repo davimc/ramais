@@ -6,6 +6,7 @@ import br.mp.mpf.prma.seart.ramais.services.exceptions.TelefoneException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.AutoPopulatingList;
 
 import javax.validation.ConstraintViolationException;
 import java.util.Optional;
@@ -14,21 +15,30 @@ import java.util.Optional;
 public class TelefoneService {
 
     @Autowired
-    TelefoneRepository telefoneRepository;
+    private TelefoneRepository telefoneRepository;
     @Transactional
     public void inserir(Telefone telefone) throws TelefoneException {
-        try{
-            telefoneRepository.save(telefone);
-        }catch (ConstraintViolationException e){
-            throw new TelefoneException(e);
-        }
+        if(!telefoneRepository.findByNumero(telefone.getNumero()).isPresent())
+            try{
+
+                telefoneRepository.save(telefone);
+            }catch (ConstraintViolationException e){
+                e.getMessage();
+            }
+        else
+            throw new TelefoneException(new Exception("Telefone já está cadastrado no sistema"));
+
     }
     @Transactional
     public void remover(Telefone telefone){
         telefoneRepository.delete(telefone);
     }
     @Transactional
-    public Telefone encontraPorId(long id){
-        return telefoneRepository.getOne(id);
+    public Optional<Telefone> encontraPorId(long id){
+        return telefoneRepository.findById(id);
+    }
+
+    public Optional<Telefone> encontraPorNumero(String numero){
+        return telefoneRepository.findByNumero(numero);
     }
 }

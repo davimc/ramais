@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.validation.ConstraintViolationException;
 import javax.xml.validation.Validator;
 import java.util.Arrays;
 import java.util.Optional;
@@ -56,18 +57,26 @@ public class TelefoneServiceIntegrationTest {
         }
         System.out.println(telefone.getRamal());
 
-        Assert.assertEquals(telefoneService.encontraPorId(5).getId(), telefone.getId());
+        Assert.assertEquals(telefoneService.encontraPorId(5).get().getId(), telefone.getId());
     }
-
     @Test
-    public void testaNumeroNuloDeveLancarExcecao() throws Exception{
+    public void testaSalvarUmNumeroJaCadastradoDeveRetornarExcecao(){
+
+        expectedException.expect(TelefoneException.class);
+        expectedException.expectMessage("Telefone já está cadastrado no sistema");
+
+    }
+    @Test
+    public void testaNumeroNuloDeveLancarExcecao() {
         expectedException.expect((TelefoneException.class));
         expectedException.expectMessage("O telefone nao pode ser salvo sem numero");
-        telefone.setNumero("");
+        telefone.setNumero(null);
         try {
             telefoneService.inserir(telefone);
-        }catch (Exception e){
+        }catch (ConstraintViolationException e){
             e.printStackTrace();;
+        }catch (TelefoneException e){
+            e.printStackTrace();
         }
 
 

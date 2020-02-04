@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.ConstraintViolationException;
+import java.util.Optional;
 
 @Service
 public class SetorService {
@@ -15,15 +16,21 @@ public class SetorService {
     SetorRepository setorRepository;
     @Transactional
     public void inserir(Setor setor) throws SetorException {
-        try{
-            setorRepository.save(setor);
-        }catch (ConstraintViolationException e){
-            throw new SetorException(e);
+        if(!setorRepository.findByNome(setor.getNome()).isPresent()) {
+            try {
+                setorRepository.save(setor);
+            } catch (ConstraintViolationException e) {
+                throw new SetorException(e);
+            }
         }
+        else
+            throw new SetorException(new Exception("Setor já está cadastrado no sistema"));
     }
     @Transactional
     public void remover(Setor setor){
         setorRepository.delete(setor);
     }
-
+    public Optional<Setor> encontraPorNome(String nomeSetor){
+        return setorRepository.findByNome(nomeSetor);
+    }
 }

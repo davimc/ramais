@@ -10,10 +10,7 @@ import br.mp.mpf.prma.seart.ramais.services.TelefoneService;
 import br.mp.mpf.prma.seart.ramais.services.exceptions.ContatoException;
 import br.mp.mpf.prma.seart.ramais.services.exceptions.SetorException;
 import br.mp.mpf.prma.seart.ramais.services.exceptions.TelefoneException;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,9 +39,14 @@ public class TelefoneServiceIntegrationTest {
     @Before
     public void start(){
         telefone =new Telefone("98027100");
-
-
-
+    }
+    @After
+    public void end(){
+        telefoneService.remover(telefone);
+    }
+    @Test
+    public void testaEncontrarUmTelefone(){
+        System.out.println(telefoneService.encontrarPorId(1).get().getNumero());
 
     }
     @Test
@@ -73,13 +75,7 @@ public class TelefoneServiceIntegrationTest {
         System.out.println(telefone.getRamal());
 
     }
-    @Test
-    public void testaSalvarUmNumeroJaCadastradoDeveRetornarExcecao(){
 
-        expectedException.expect(TelefoneException.class);
-        expectedException.expectMessage("Telefone já está cadastrado no sistema");
-
-    }
     @Test
     public void testaNumeroNuloDeveLancarExcecao() {
         expectedException.expect((TelefoneException.class));

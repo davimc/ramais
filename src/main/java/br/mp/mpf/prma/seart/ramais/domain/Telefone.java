@@ -53,6 +53,6 @@ public class Telefone {
     }
 
     private String geraRamal(){
-        return numero.substring(numero.length()-4);
+        return ((!numero.equals(""))||numero!=null)?numero.substring(numero.length()-4):"7100";
     }
 }

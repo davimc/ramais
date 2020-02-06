@@ -29,12 +29,9 @@ public class SetorService {
     /*atenção ao atualizar!!
     TENHA CERTEZA QUE ESTE CONTATO JÁ EXISTE NO BD OU ENTÃO HAVERÁ DUPLICIDADE
     */
-    public void atualizar(Setor setor) throws SetorException {
-        try {
-            setorRepository.save(setor);
-        } catch (ConstraintViolationException e) {
-            throw new SetorException(e);
-        }
+
+    public void atualizar(Setor setor)  {
+        setorRepository.save(setor);
     }
     @Transactional
     public void remover(Setor setor){

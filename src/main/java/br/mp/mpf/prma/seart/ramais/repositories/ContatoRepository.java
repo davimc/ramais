@@ -12,6 +12,8 @@ import java.util.Optional;
 
 @Repository
 public interface ContatoRepository extends JpaRepository <Contato, Long> {
+    @Query("SELECT c FROM Contato c")
+    public Optional<Contato> find();
     @Query("SELECT c FROM Contato c WHERE c.nome LIKE %:nome%")
     public Optional<Contato> findByNome(@Param("nome") String nome);
     public Optional<Contato> findByTelefoneRamal(String ramal);

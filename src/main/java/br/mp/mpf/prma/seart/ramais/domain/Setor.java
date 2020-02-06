@@ -61,8 +61,11 @@ public class Setor {
         this.contatos = contatos;
     }
 
-    public void adicionaNovoContato(Contato contato) {
+    public void adicionaContato(Contato contato) {
         this.contatos.add(contato);
+    }
+    public void removeContato(Contato contato){
+        this.contatos.remove(contato);
     }
 
     @Override

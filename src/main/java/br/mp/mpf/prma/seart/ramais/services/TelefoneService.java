@@ -30,12 +30,16 @@ public class TelefoneService {
     /*atenção ao atualizar!!
     TENHA CERTEZA QUE ESTE CONTATO JÁ EXISTE NO BD OU ENTÃO HAVERÁ DUPLICIDADE
     */
-    public void atualizar(Telefone telefone) throws TelefoneException {
-        try{
+    public void designar(Telefone telefone) {
+            telefone.setDisponivel(false);
             telefoneRepository.save(telefone);
-        }catch (ConstraintViolationException e){
-            throw new TelefoneException(e);
-        }
+    }
+    public void destituir(Telefone telefone){
+        telefone.setDisponivel(true);
+        telefoneRepository.save(telefone);
+    }
+    public void atualizar(Telefone telefone){
+        telefoneRepository.save(telefone);
     }
     @Transactional
     public void remover(Telefone telefone){

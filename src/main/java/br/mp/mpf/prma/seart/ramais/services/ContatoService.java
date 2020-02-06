@@ -7,6 +7,7 @@ import br.mp.mpf.prma.seart.ramais.repositories.ContatoRepository;
 import br.mp.mpf.prma.seart.ramais.services.exceptions.ContatoException;
 import br.mp.mpf.prma.seart.ramais.services.exceptions.SetorException;
 import br.mp.mpf.prma.seart.ramais.services.exceptions.TelefoneException;
+import br.mp.mpf.prma.seart.ramais.services.forms.ContatoForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,17 +35,13 @@ public class ContatoService {
         if( telefone.isPresent() && setor.isPresent()) {
             if(telefone.get().isDisponivel()) {
                 telefone.get().setDisponivel(false);
-                setor.get().adicionaNovoContato(contato);
+                setor.get().adicionaContato(contato);
                 try {
-                    telefoneService.atualizar(telefone.get());
+                    telefoneService.designar(telefone.get());
                     contatoRepository.save(contato);
                     setorService.atualizar(setor.get());
                 } catch (ConstraintViolationException e) {
                     throw new ContatoException(e);
-                }catch(TelefoneException e){
-                    e.printStackTrace();
-                }catch (SetorException e){
-                    e.printStackTrace();
                 }
 
             } else {
@@ -52,6 +49,27 @@ public class ContatoService {
             }
         }else
             throw new ContatoException(new Exception("Verifique o setor ou ramal"));
+    }
+    public void atualizar(Contato contatoAntigo, ContatoForm contatoAtualizado) {
+        if(contatoAntigo.getTelefone()!=null) {
+            if (contatoAntigo.getTelefone().getNumero() != contatoAtualizado.getTelefone()) {
+                Telefone telefoneAntigo = telefoneService.encontrarPorNumero(contatoAntigo.getTelefone().getNumero()).get();
+                Telefone telefoneAtual = telefoneService.encontrarPorNumero(contatoAtualizado.getTelefone()).get();
+                telefoneService.destituir(telefoneAntigo);
+                telefoneService.designar(telefoneAtual);
+                contatoAntigo.setTelefone(telefoneAtual);
+            }
+        } else{
+            telefoneService.designar(telefoneService.encontrarPorNumero(contatoAtualizado.getTelefone()).get());
+            contatoAntigo.setTelefone(telefoneService.encontrarPorNumero(contatoAtualizado.getTelefone()).get());
+        }
+        if(contatoAntigo.getSetor().getNome()!=contatoAtualizado.getNomeSetor()) {
+            Setor setorAntigo = setorService.encontraPorNome(contatoAntigo.getSetor().getNome()).get();
+            Setor setorAtualizado = setorService.encontraPorNome(contatoAtualizado.getNomeSetor()).get();
+            setorAntigo.removeContato(contatoAntigo);
+            setorAtualizado.adicionaContato(contatoRepository.findByNome(contatoAtualizado.getNomeContato()).get());
+            contatoAntigo.setSetor(setorAtualizado);
+        }
     }
 
     public Optional<Contato> buscarPorNome(String nome){

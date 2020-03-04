@@ -78,6 +78,9 @@ public class ContatoService {
     public Optional<Contato> buscarPorRamal(String ramal){
         return contatoRepository.findByTelefoneRamal(ramal);
     }
+    public Optional<Contato> buscarPorSetor(String setor) {
+        return contatoRepository.findBySetor(setor);
+    }
     public void remover(Contato contato){
         contatoRepository.delete(contato);
     }

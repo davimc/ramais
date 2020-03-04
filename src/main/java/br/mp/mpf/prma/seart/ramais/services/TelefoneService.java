@@ -45,6 +45,9 @@ public class TelefoneService {
     public void remover(Telefone telefone){
         telefoneRepository.delete(telefone);
     }
+    public void removerTodos(){
+        telefoneRepository.deleteAll();
+    }
     @Transactional
     public Optional<Telefone> encontrarPorId(long id){
         return telefoneRepository.findById(id);

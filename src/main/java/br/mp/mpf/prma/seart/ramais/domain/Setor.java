@@ -15,6 +15,7 @@ public class Setor {
 
     @NotEmpty(message = "O setor precisa ter um nome")
     private String nome;
+    private int numero;
 
     @OneToOne
     @JoinColumn(name= "id_telefone")
@@ -26,8 +27,9 @@ public class Setor {
     public Setor() {
     }
 
-    public Setor(String nome, Telefone telefone) {
+    public Setor(String nome, int numero, Telefone telefone) {
         this.nome = nome;
+        this.numero = numero;
         this.telefone = telefone;
     }
 
@@ -41,6 +43,14 @@ public class Setor {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
     }
 
     public Telefone getTelefone() {
@@ -68,19 +78,4 @@ public class Setor {
         this.contatos.remove(contato);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Setor setor = (Setor) o;
-        return id == setor.id &&
-                nome.equals(setor.nome) &&
-                Objects.equals(telefone, setor.telefone) &&
-                Objects.equals(contatos, setor.contatos);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(nome, telefone, contatos);
-    }
 }

@@ -41,40 +41,48 @@ public class ContatoServiceIntegrationTest {
 
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
-    @Before
-    public void start(){
-        telefoneSetor =new Telefone("98027400");
-        telefoneContato = new Telefone("98027401");
-
-        try{
-            telefoneService.inserir(telefoneSetor);
-            telefoneService.inserir(telefoneContato);
-        }catch(TelefoneException e){
-            e.getMessage();
-        }
-        setor = new Setor("SEART", telefoneSetor);
-
-
-        setor.setContatos(Arrays.asList(contato));
-        try{
-            setorService.inserir(setor);
-        }catch(SetorException e){
-            e.getMessage();
-        }
-        contato = new Contato("Davi", telefoneContato, setor);
-
-    }
-
-    @Test
-    public void testaNomeNuloDeveLancarExcecao() throws Exception{
-        expectedException.expect((ContatoException.class));
-        expectedException.expectMessage("O contato precisa de um nome");
-        contato.setNome("");
-        try {
-            contatoService.inserir(contato);
-        }catch(ContatoException e){
-            e.getMessage();
-        }
-    }
+//    @Before
+//    public void start(){
+//        telefoneSetor =new Telefone("98027400");
+//        telefoneContato = new Telefone("98027401");
+//
+//        try{
+//            telefoneService.inserir(telefoneSetor);
+//            telefoneService.inserir(telefoneContato);
+//        }catch(TelefoneException e){
+//            e.getMessage();
+//        }
+//        //setor = new Setor("SEART", telefoneSetor);
+//
+//
+//        setor.setContatos(Arrays.asList(contato));
+//        try{
+//            setorService.inserir(setor);
+//        }catch(SetorException e){
+//            e.getMessage();
+//        }
+//        contato = new Contato("Davi", telefoneContato, setor);
+//
+//    }
+//
+//    @After
+//    public void end(){
+//        telefoneService.remover(telefoneContato);
+//        telefoneService.remover(telefoneSetor);
+//        setorService.remover(setor);
+//        contatoService.remover(contato);
+//    }
+//
+//    @Test
+//    public void testaNomeNuloDeveLancarExcecao() throws Exception{
+//        expectedException.expect((ContatoException.class));
+//        expectedException.expectMessage("O contato precisa de um nome");
+//        contato.setNome("");
+//        try {
+//            contatoService.inserir(contato);
+//        }catch(ContatoException e){
+//            e.getMessage();
+//        }
+//    }
 
 }

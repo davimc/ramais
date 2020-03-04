@@ -10,7 +10,8 @@ CREATE TABLE IF NOT EXISTS setor
   (
      id integer not null AUTO_INCREMENT primary key ,
      nome   VARCHAR(50) NOT NULL,
-     id_telefone   int NOT NULL,
+     numero int,
+     id_telefone   int,
      FOREIGN KEY (id_telefone) REFERENCES telefone(id)
   );
 CREATE TABLE contato

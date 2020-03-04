@@ -37,6 +37,9 @@ public class SetorService {
     public void remover(Setor setor){
         setorRepository.delete(setor);
     }
+    public void removerTodos() {
+        setorRepository.deleteAll();
+    }
 
     public Optional<Setor> encontraPorNome(String nomeSetor){
         return setorRepository.findByNome(nomeSetor);

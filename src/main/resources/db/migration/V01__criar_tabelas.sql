@@ -18,7 +18,7 @@ CREATE TABLE contato
   (
      id integer not null AUTO_INCREMENT primary key,
      nome   VARCHAR(50) NOT NULL,
-     id_telefone  integer NOT NULL,
+     id_telefone  integer,
      id_setor integer NOT NULL,
      FOREIGN KEY (id_setor) REFERENCES setor(id),
      FOREIGN KEY (id_telefone) REFERENCES telefone(id)

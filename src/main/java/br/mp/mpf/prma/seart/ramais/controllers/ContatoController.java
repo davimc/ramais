@@ -6,9 +6,11 @@ import br.mp.mpf.prma.seart.ramais.services.exceptions.ContatoException;
 import br.mp.mpf.prma.seart.ramais.services.exceptions.TelefoneException;
 import br.mp.mpf.prma.seart.ramais.services.forms.ContatoForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
+import java.awt.*;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,13 +27,9 @@ public class ContatoController {
         return contatoService.listaTodosContatos();
     }
 
-    @GetMapping("/nome={nome}")
-    public Optional<Contato> listaContatoPeloNome(@PathParam("nome") String nome){
+    @PostMapping(path="/nome", produces= MediaType.APPLICATION_JSON_VALUE)
+    public Optional<Contato> listaContatoPeloNome(@RequestBody String nome){
         return contatoService.buscarPorNome(nome);
-    }
-    @GetMapping("/ramal{ramal}")
-    public Optional<Contato> listaContatoPeloRamal(@PathParam("ramal") String ramal){
-        return contatoService.buscarPorRamal(ramal);
     }
     @GetMapping("/setor{setor}")
     public Optional<Contato> listaContatoPeloSetor(@PathParam("setor") String setor){

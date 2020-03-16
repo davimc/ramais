@@ -27,8 +27,8 @@ public class ContatoController {
         return contatoService.listaTodosContatos();
     }
 
-    @PostMapping(path="/nome", produces= MediaType.APPLICATION_JSON_VALUE)
-    public Optional<Contato> listaContatoPeloNome(@RequestBody String nome){
+    @GetMapping("/nome?{nome}")
+    public Optional<Contato> listaContatoPeloNome(@PathParam("nome") String nome){
         return contatoService.buscarPorNome(nome);
     }
     @GetMapping("/setor{setor}")

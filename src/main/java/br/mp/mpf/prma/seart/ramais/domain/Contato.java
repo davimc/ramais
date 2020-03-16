@@ -1,6 +1,6 @@
 package br.mp.mpf.prma.seart.ramais.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -9,6 +9,10 @@ import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class Contato {
+    /*Necessáiro de modificar Contato e Setor para herdar
+     *de uma class abstrata e adicionar id correspondente
+     * no telefone
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;

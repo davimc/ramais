@@ -27,12 +27,12 @@ public class ContatoController {
         return contatoService.listaTodosContatos();
     }
 
-    @GetMapping("/nome?{nome}")
-    public Optional<Contato> listaContatoPeloNome(@PathParam("nome") String nome){
+    @GetMapping("/nome{nome}")
+    public Optional<Contato> listaContatoPeloNome(@PathVariable("nome") String nome){
         return contatoService.buscarPorNome(nome);
     }
     @GetMapping("/setor{setor}")
-    public Optional<Contato> listaContatoPeloSetor(@PathParam("setor") String setor){
+    public Optional<Contato> listaContatoPeloSetor(@PathVariable("setor") String setor){
         return contatoService.buscarPorRamal(setor);
     }
 

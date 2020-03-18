@@ -9,6 +9,6 @@ INSERT INTO Setor(id,nome, numero, id_telefone) VALUES (1,'ctic',123,1);
 INSERT INTO Setor(id,nome, numero, id_telefone) VALUES (2,'cojud',125,3);
 
 
-INSERT INTO Contato(id, nome, id_telefone, id_setor) VALUES(1,"Walber Leão Filho",2,1);
-INSERT INTO Contato(id, nome, id_telefone, id_setor) VALUES(2,"Danilo Alguma Coisa",4,2);
-INSERT INTO Contato(id, nome, id_telefone,id_setor) VALUES(3,"Raimundo Junior",5,1);
+INSERT INTO Contato(id, nome,email, id_telefone, id_setor) VALUES(1,"Walber Leão Filho","Walber@mpf.mp.br",2,1);
+INSERT INTO Contato(id, nome,email, id_telefone, id_setor) VALUES(2,"Danilo Alguma Coisa","Danilo@mpf.mp.br",4,2);
+INSERT INTO Contato(id, nome,email, id_telefone,id_setor) VALUES(3,"Raimundo Junior","Raimundo@mpf.mp.br",5,1);

@@ -67,19 +67,19 @@ public class ContatoService {
             Setor setorAntigo = setorService.encontraPorNome(contatoAntigo.getSetor().getNome()).get();
             Setor setorAtualizado = setorService.encontraPorNome(contatoAtualizado.getNomeSetor()).get();
             setorAntigo.removeContato(contatoAntigo);
-            setorAtualizado.adicionaContato(contatoRepository.findByNome(contatoAtualizado.getNomeContato()).get());
+            setorAtualizado.adicionaContato(contatoRepository.findTopByNome(contatoAtualizado.getNomeContato()).get());
             contatoAntigo.setSetor(setorAtualizado);
         }
     }
 
-    public Optional<Contato> buscarPorNome(String nome){
+    public List<Contato> buscarPorNome(String nome){
         return contatoRepository.findByNome(nome);
     }
     public Optional<Contato> buscarPorRamal(String ramal){
         return contatoRepository.findByTelefoneRamal(ramal);
     }
     public Optional<Contato> buscarPorSetor(String setor) {
-        return contatoRepository.findBySetor(setor);
+        return contatoRepository.findBySetor_Nome(setor);
     }
     public void remover(Contato contato){
         contatoRepository.delete(contato);

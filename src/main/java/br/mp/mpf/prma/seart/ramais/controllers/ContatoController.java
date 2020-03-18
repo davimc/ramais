@@ -27,13 +27,13 @@ public class ContatoController {
         return contatoService.listaTodosContatos();
     }
 
-    @GetMapping("/nome?{nome}")
-    public Optional<Contato> listaContatoPeloNome(@PathParam("nome") String nome){
-        return contatoService.buscarPorNome(nome);
+    @GetMapping("/contact_name={name}")
+    public List<Contato> listaContatoPeloNome(@PathVariable("name") String name){
+        return contatoService.buscarPorNome(name);
     }
-    @GetMapping("/setor{setor}")
-    public Optional<Contato> listaContatoPeloSetor(@PathParam("setor") String setor){
-        return contatoService.buscarPorRamal(setor);
+    @GetMapping("/contact_sector={sector}")
+    public Optional<Contato> listaContatoPeloSetor(@PathVariable("sector") String sector){
+        return contatoService.buscarPorRamal(sector);
     }
 
 

@@ -19,6 +19,7 @@ public class Contato {
     //pegar foto
     @NotEmpty(message = "O contato precisa de um nome")
     private String nome;
+    private String email;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name= "id_telefone")
@@ -31,15 +32,17 @@ public class Contato {
     public Contato() {
     }
 
-    public Contato(@NotEmpty(message = "O contato precisa de um nome") String nome,  Setor setor) {
+    public Contato(@NotEmpty(message = "O contato precisa de um nome") String nome, String email,  Setor setor) {
         this.nome = nome;
         this.setor = setor;
+        this.email = email;
     }
 
-    public Contato(@NotEmpty(message = "O contato precisa de um nome") String nome, Telefone telefone,  Setor setor) {
+    public Contato(@NotEmpty(message = "O contato precisa de um nome") String nome, String email, Telefone telefone,  Setor setor) {
         this.nome = nome;
         this.telefone = telefone;
         this.setor = setor;
+        this.email = email;
     }
 
     public long getId() {
@@ -52,6 +55,14 @@ public class Contato {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Telefone getTelefone() {

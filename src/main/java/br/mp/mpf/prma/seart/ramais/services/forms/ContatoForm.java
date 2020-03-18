@@ -12,6 +12,7 @@ import java.util.IllegalFormatException;
 
 public class ContatoForm {
     private String nomeContato;
+    private String emailContato;
     private String nomeSetor;
     private String numeroTelefone;
     @Autowired
@@ -52,6 +53,6 @@ public class ContatoForm {
     public Contato converter(){
         Telefone numeroContato = telefoneService.encontrarPorNumero(this.numeroTelefone).get();
         Setor setorContato = setorService.encontraPorNome(this.nomeSetor).get();
-        return numeroContato!=null? new Contato(nomeContato, numeroContato, setorContato):new Contato(nomeContato,setorContato);
+        return numeroContato!=null? new Contato(nomeContato,emailContato, numeroContato, setorContato):new Contato(nomeContato,emailContato,setorContato);
     }
 }

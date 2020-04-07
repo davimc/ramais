@@ -22,10 +22,10 @@ public class ContatoController {
     private ContatoService contatoService;
 
     /*Métodos GET*/
-    @GetMapping
+    /*@GetMapping
     public List<Contato> listaDeContatos(){
         return contatoService.listaTodosContatos();
-    }
+    }*/
 
     @GetMapping("/contact_name={name}")
     public List<Contato> listaContatoPeloNome(@PathVariable("name") String name){
@@ -33,7 +33,7 @@ public class ContatoController {
     }
     @GetMapping("/contact_sector={sector}")
     public Optional<Contato> listaContatoPeloSetor(@PathVariable("sector") String sector){
-        return contatoService.buscarPorRamal(sector);
+        return contatoService.buscarPorSetor(sector);
     }
 
 
